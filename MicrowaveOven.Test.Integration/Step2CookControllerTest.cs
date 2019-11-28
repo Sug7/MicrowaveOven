@@ -22,20 +22,22 @@ namespace MicrowaveOven.Test.Integration
         private IPowerTube _powerTube;
         private IDisplay _display;
         private IOutput _output;
-        private IUserInterface _userInterface;
+        
 
-
+        [SetUp]
         public void SetUp()
         {
-            _cookController = new CookController(_timer, _display, _powerTube, _userInterface);
-            _powerTube = new PowerTube(_output);
-            _timer = new Timer();
             // Laver en substitute instans for følgende fake modulerne
             _display = Substitute.For<IDisplay>();
             _output = Substitute.For<IOutput>();
+
+            _cookController = new CookController(_timer, _display, _powerTube);
+            _powerTube = new PowerTube(_output);
+            _timer = new Timer();
+            
         }
 
-        // Test 1 Timer to CookController
+        // Test 1 - Fra Timer til CookController
         [Test]
         public void Start_StartCooking_Power()
         {
@@ -56,13 +58,13 @@ namespace MicrowaveOven.Test.Integration
         [Test]
         public void Start_StartCooking_ExpireOff()
         {
-            int time = 2;
+            int time = 1;
             _cookController.StartCooking(60, time);
-            Thread.Sleep(3000);
+            Thread.Sleep(1500);
             _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("Off")));
         }
 
-        // Test 2 CookController to Timer
+        // Test 2 - Fra CookController til Timer
         [TestCase(610, 610)]
         [TestCase(0, 0)]
         [TestCase(100, 100)]

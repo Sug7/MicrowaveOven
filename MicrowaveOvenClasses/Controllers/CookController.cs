@@ -15,14 +15,14 @@ namespace MicrowaveOvenClasses.Controllers
         private IPowerTube myPowerTube;
         private ITimer myTimer;
 
-        public CookController(
-            ITimer timer,
-            IDisplay display,
-            IPowerTube powerTube,
-            IUserInterface ui) : this(timer, display, powerTube)
-        {
-            UI = ui;
-        }
+        //public CookController(
+        //    ITimer timer,
+        //    IDisplay display,
+        //    IPowerTube powerTube,
+        //    IUserInterface ui) : this(timer, display, powerTube)
+        //{
+        //    UI = ui;
+        //}
 
         public CookController(
             ITimer timer,
