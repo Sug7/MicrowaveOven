@@ -19,11 +19,12 @@ namespace Microwave.Test.Unit
             uut = new PowerTube(output);
         }
 
+        // Ændre 50 % til 50
         [Test]
         public void TurnOn_WasOff_CorrectOutput()
         {
             uut.TurnOn(50);
-            output.Received().OutputLine(Arg.Is<string>(str => str.Contains("50 %")));
+            output.Received().OutputLine(Arg.Is<string>(str => str.Contains("50")));
         }
 
         [Test]
@@ -54,10 +55,11 @@ namespace Microwave.Test.Unit
             Assert.Throws<System.ArgumentOutOfRangeException>(() => uut.TurnOn(-1));
         }
 
+        // 101 ændres til 701 
         [Test]
         public void TurnOn_HighPower_ThrowsException()
         {
-            Assert.Throws<System.ArgumentOutOfRangeException>(() => uut.TurnOn(101));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => uut.TurnOn(701));
         }
 
         [Test]

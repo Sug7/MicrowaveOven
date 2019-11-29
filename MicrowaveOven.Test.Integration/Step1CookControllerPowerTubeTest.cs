@@ -34,7 +34,6 @@ namespace MicrowaveOven.Test.Integration
             _display = Substitute.For<IDisplay>();
             _output = Substitute.For<IOutput>();
 
-
             _cookController = new CookController(_timer, _display, _powerTube);
             _powerTube = new PowerTube(_output);
 
