@@ -56,7 +56,7 @@ namespace MicrowaveOven.Test.Integration
             _cookController.StartCooking(60, 60);
             Thread.Sleep(2000);
             _cookController.Stop();
-            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("Off")));
+            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("off")));
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace MicrowaveOven.Test.Integration
             int time = 1;
             _cookController.StartCooking(60, time);
             Thread.Sleep(1500);
-            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("Off")));
+            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("off")));
         }
 
         // Test 2 - Fra CookController til Timer

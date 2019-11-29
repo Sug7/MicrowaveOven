@@ -65,7 +65,7 @@ namespace MicrowaveOven.Test.Integration
         {
             _cookController.StartCooking(50, 60);
             _cookController.Stop();
-            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("Off")));
+            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("off")));
         }
     }
 }
