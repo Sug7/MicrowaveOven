@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,11 +18,12 @@ namespace MicrowaveOven.Test.Integration
     [TestFixture]
     public class Step2CookControllerTest
     {
-        private ICookController _cookController;
+        private CookController _cookController;
         private ITimer _timer; 
         private IPowerTube _powerTube;
         private IDisplay _display;
         private IOutput _output;
+        private IUserInterface _ui;
         
 
         [SetUp]
@@ -30,11 +32,13 @@ namespace MicrowaveOven.Test.Integration
             // Laver en substitute instans for følgende fake modulerne
             _display = Substitute.For<IDisplay>();
             _output = Substitute.For<IOutput>();
+            _ui = Substitute.For<IUserInterface>();
 
-            _cookController = new CookController(_timer, _display, _powerTube);
             _powerTube = new PowerTube(_output);
             _timer = new Timer();
-            
+
+            _cookController = new CookController(_timer, _display, _powerTube);
+            _cookController.UI = _ui;
         }
 
         // Test 1 - Fra Timer til CookController

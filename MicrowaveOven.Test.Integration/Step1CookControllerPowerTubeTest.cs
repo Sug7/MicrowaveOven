@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.S
 using System.Text;
 using System.Threading.Tasks;
 using MicrowaveOvenClasses.Boundary;
@@ -19,11 +18,13 @@ namespace MicrowaveOven.Test.Integration
     [TestFixture]
     public class Step1CookControllerPowerTubeTest
     {
-        private ICookController _cookController;
+        private CookController _cookController;
         private IPowerTube _powerTube;
         private ITimer _timer;
         private IDisplay _display;
         private IOutput _output;
+        private IUserInterface _ui;
+
 
 
         [SetUp]
@@ -33,9 +34,12 @@ namespace MicrowaveOven.Test.Integration
             _timer = Substitute.For<ITimer>();
             _display = Substitute.For<IDisplay>();
             _output = Substitute.For<IOutput>();
+            _powerTube = new PowerTube(_output);
+            _ui = Substitute.For<IUserInterface>();
+
 
             _cookController = new CookController(_timer, _display, _powerTube);
-            _powerTube = new PowerTube(_output);
+            _cookController.UI = _ui;
 
         }
 
@@ -55,6 +59,7 @@ namespace MicrowaveOven.Test.Integration
         }
 
         // Test 3 - Stop Power på StartCooking metode
+
         [Test]
         public void Stop_StartCooking_OffPower()
         {
